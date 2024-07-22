@@ -59,6 +59,17 @@ TRUNCATE TABLE auto_table;
 -- TRUNCATE TABLE : DDL 테이블 구조만 남기고 상태를 초기화
 -- DELETE FROM : DML 테이블 레코드만 제거
 
+-- INSERT INTO SELECT : 삽입 작업 시에 조회 결과를 사용하여 삽입
+INSERT INTO example_table 
+SELECT * FROM example_table WHERE column1 IS NULL;
+
+-- UPDATE SELECT : 수정 작업 시 조회 결과를 사용하여 수정 (수정 값에 대하여)
+UPDATE example_table SET column1 = (
+	SELECT num 
+    FROM auto_table 
+    WHERE idx = '1'
+);
+
 
 
 
