@@ -24,9 +24,9 @@ CREATE TABLE data_type (
     int_column INT,
     -- DOUBLE : 실수 타입(많이 긴 타입 쓸 때)
     double_column DOUBLE,
-    -- FLOAT : 실수 타입
+    -- FLOAT : 실수 타입(보통 많이 씀)
     float_column FLOAT,
-    -- BOOLEAN : 논리 타입
+    -- BOOLEAN : 논리 타입(tinyint 0,1)
     boolean_column BOOLEAN,
     -- VARCHAR(문자열 길이) : 가변길이 문자열, 최대 10자
     string_column VARCHAR(10),
