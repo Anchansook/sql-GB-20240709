@@ -7,18 +7,51 @@
 
 -- 1. 카타르 아시안컵 데이터베이스 생성
 -- qatar_asian_cup
+CREATE DATABASE qatar_asian_cup;
+USE qatar_asian_cup;
 
 -- 2. 개발자 계정 생성
 -- 사용자명 : qatar_developer / 접근위치 : 모든 곳에서 접근 가능 / 비밀번호 : qatar123
+CREATE USER 'qatar_developer'@'%' IDENTIFIED BY 'qatar123';
 
 -- 3. 테이블 생성
 -- 3.1. 참가국 : country (name[가변문자열 30], group_name[가변문자열 5],manager[가변문자열 30], lanking[정수])
+CREATE TABLE country (
+	name VARCHAR(30),
+    group_name VARCHAR(5),
+    manager VARCHAR(30),
+    lanking INT
+);
 
 -- 3.2. 선수 : player (name[가변문자열 30], age[정수], position[가변문자열 10], uniform_number[정수], country[가변문자열 30])
+CREATE TABLE player (
+	name VARCHAR(30),
+    age INT,
+    position VARCHAR(10),
+    uniform_number INT,
+    country VARCHAR(30)
+);
 
 -- 3.3. 경기장 : stadium (name[가변문자열 50], volume[정수], address[문자열])
+CREATE TABLE stadium (
+	name VARCHAR(50),
+    volume INT,
+    address TEXT
+);
 
 -- 3.4. 심판 : referee (name[가변문자열 30], age[정수], country[가변문자열 30], position[가변문자열 10])
+CREATE TABLE referee (
+	name VARCHAR(30),
+    age INT,
+    country VARCHAR(30),
+    position VARCHAR(10)
+);
+
+
+
+
+
+
 
 
 
