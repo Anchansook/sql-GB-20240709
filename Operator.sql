@@ -97,6 +97,78 @@ WHERE (transaction_number % 3) = 2;
 
 SELECT * FROM transaction;
 
+UPDATE transaction SET note = null
+WHERE transaction_number = 6;
+
+-- <=> : 좌항과 우항이 모두 null이면 true
+SELECT * FROM transaction
+WHERE note <=> complete;
+
+-- IS : 좌항이 우항과 같으면 true (키워드)
+-- IS NOT : 좌항이 우항과 다르면 true (키워드)
+SELECT * FROM transaction
+WHERE complete IS TRUE;
+
+SELECT * FROM transaction
+WHERE complete IS NULL;
+
+SELECT * FROM transaction
+WHERE complete IS NOT NULL;
+
+-- BETWEEN a AND b : 좌항이 a보다 크거나 같으면서 b보다 작거나 같으면 true (a이상 b이하, 두 개를 포함해서 두 개의 사이)
+-- NOT BETWEEN a AND b : 좌항이 a보다 작거나 b보다 크면 true (a와 b사이를 포함하지 않는 범위)
+SELECT * FROM transaction
+WHERE transaction_date BETWEEN '2024-07-15' AND '2024-07-20';
+
+SELECT * FROM transaction
+WHERE transaction_date NOT BETWEEN '2024-07-15' AND '2024-07-20';
+
+-- IN() : 주어진 리스트 중에 '하나라도 일치'하면 true
+-- NOT IN() : 주어진 리스트 중에 '하나도 일치하지 않'으면 true
+SELECT * FROM transaction
+WHERE breakdown IN('노트북', '책상');
+
+-- 논리연산자
+
+-- AND (&&) : 좌항과 우항이 모두 true이면 true
+SELECT * FROM transaction
+WHERE transaction_type = '판매' AND amount >= 1500000;
+
+-- OR (||) : 좌항과 우항 중 하나라도 true이면 true
+SELECT * FROM transaction
+WHERE transaction_date >= '2024-07-15' OR transaction_type = '판매';
+
+-- XOR : 좌항과 우항이 서로 다르면 true (비교 중 하나는 긍정이면서 하나는 부정)
+SELECT * FROM transaction
+WHERE transaction_date >= '2024-07-15' XOR transaction_type = '판매';
+-- transaction_date >= '2024-07-15' AND transaction_type != '판매'
+--  OR
+-- transaction_date < '2024-07-15' AND transaction_type = '판매'
+
+-- LIKE 연산자 : 문자열을 패턴을 기준으로 비교하고자 할 때 사용
+-- % : 임의의 개수(0 ~ 무한대)의 문자 표현
+-- _ : 임의의 한 개 문자 표현
+SELECT * FROM transaction
+WHERE transaction_date LIKE '2024-07-%';
+
+SELECT * FROM transaction
+WHERE transaction_date LIKE '2024-07-2_';
+
+SELECT * FROM transaction
+WHERE breakdown LIKE '의%';
+
+SELECT * FROM transaction
+WHERE transaction_date LIKE '%-10';
+
+SELECT * FROM transaction
+WHERE transaction_date LIKE '2024-__-13';
+
+
+
+
+
+
+
 
 
 
