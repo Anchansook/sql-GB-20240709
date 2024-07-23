@@ -70,6 +70,8 @@ UPDATE example_table SET column1 = (
     WHERE idx = '1'
 );
 
+                                                                                                                                                                                                                                                                                                                                                                          
+
 
 
 
