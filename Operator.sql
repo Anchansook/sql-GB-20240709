@@ -163,6 +163,28 @@ WHERE transaction_date LIKE '%-10';
 SELECT * FROM transaction
 WHERE transaction_date LIKE '2024-__-13';
 
+-- 정렬
+-- ORDER BY : 조회 결과를 특정 컬럼 기준으로 정렬
+-- ASC : 오름차순 정렬(기본 값 굳이 명명 안해도 됨) / DESC : 내림차순 정렬 
+SELECT * FROM transaction
+ORDER BY amount ASC;
+
+SELECT * FROM transaction
+ORDER BY amount DESC;
+
+-- 먼저 정렬해준게 기준이 된다.
+SELECT * FROM transaction
+ORDER BY tax, amount DESC;
+
+-- 중복제거
+-- DISTINCT : SELECT 결과 테이블에서 컬럼의 조합의 중복을 제거하여 출력
+SELECT DISTINCT breakdown FROM transaction;
+SELECT DISTINCT breakdown, amount FROM transaction;
+
+
+
+
+
 
 
 
