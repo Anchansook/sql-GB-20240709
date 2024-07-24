@@ -32,6 +32,33 @@ CREATE TABLE board (
     CONSTRAINT writer_fk FOREIGN KEY (write_id) REFERENCES user (id)
 );
 
+-- 로그인
+SELECT * FROM user
+WHERE id = 'qwer1234' AND password = 'qwer1234';
+
+SELECT * FROM user WHERE id = :id;
+
+-- 아이디 중복확인
+SELECT * FROM user WHERE id = 'qwer1234';
+
+-- 이메일 인증
+INSERT INTO email_auth VALUES ('qwer1234@qwer.com', '0123');
+
+-- 이메일 인증확인
+SELECT * FROM email_auth
+WHERE email = 'qwer1234@qwer.com' AND auth_number = '0123';
+
+-- 회원가입
+INSERT INTO user (id, password, email) VALUES ('qwer1234', 'qwer1234', 'qwer1234@qwer.com');
+
+-- 게시물 리스트
+SELECT receipt_number, status, title, write_id, write_date, view_count
+FROM board
+WHERE 
+title LIKE '%:title%'
+ORDER BY receipt_number DESC
+LIMIT 10;
+
 
 
 
