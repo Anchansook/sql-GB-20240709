@@ -24,7 +24,7 @@ CREATE TABLE board (
 	receipt_number INT PRIMARY KEY AUTO_INCREMENT,
     title VARCHAR(50) NOT NULL,
     status BOOLEAN NOT NULL DEFAULT false,
-    write_id VARCHAR(20) NOT NULL,
+    writer_id VARCHAR(20) NOT NULL,
     write_date DATETIME NOT NULL DEFAULT now(),
     view_count INT NOT NULL DEFAULT 0,
     contents VARCHAR(1000) NOT NULL,
@@ -52,12 +52,35 @@ WHERE email = 'qwer1234@qwer.com' AND auth_number = '0123';
 INSERT INTO user (id, password, email) VALUES ('qwer1234', 'qwer1234', 'qwer1234@qwer.com');
 
 -- 게시물 리스트
-SELECT receipt_number, status, title, write_id, write_date, view_count
+SELECT receipt_number, status, title, writer_id, write_date, view_count
 FROM board
 WHERE 
-title LIKE '%:title%'
+title LIKE '%두%'
 ORDER BY receipt_number DESC
-LIMIT 10;
+LIMIT 0, 10;
+
+-- 게시물 작성
+INSERT INTO board (title, contents, writer_id)
+VALUES ('열두번째 게시물', '안녕하세욥', 'qwer1234');
+
+-- 게시물 상세보기
+UPDATE board SET view_count = view_count + 1
+WHERE receipt_number = 1;
+
+SELECT receipt_number, title, writer_id, write_date, view_count, contents, reply
+FROM board
+WHERE receipt_number = 1;
+
+-- 답글 작성, 답글 작성 시에 완료 상태로 같이 바뀌도록
+UPDATE board SET reply = '반갑구만유', status = true
+WHERE receipt_number = 1;
+
+-- 게시물 수정
+UPDATE board SET title = '게시물 수정', contents = '안녕하세욥'
+WHERE receipt_number = 1;
+
+-- 게시물 삭제
+DELETE FROM board WHERE receipt_number = 1;
 
 
 
