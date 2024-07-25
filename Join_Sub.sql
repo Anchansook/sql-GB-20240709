@@ -47,10 +47,60 @@ FROM department DPT;
 
 -- INNER JOIN : 두 테이블에서 조건이 일치하는 레코드만 반환
 -- SELECT column, ... FROM 기준테이블 INNER JOIN 조합할 테이블 ON 조인 조건
-SELECT * FROM employee E INNER JOIN department D ON E.department_code = D.department_code;
+SELECT 
+E.employee_number '사번', E.name '사원이름', E.age '나이', 
+D.department_code '부서코드', D.name '부서명', D.tel_number '부서 전화번호'
+FROM employee E INNER JOIN department D ON E.department_code = D.department_code;
 
+-- LEFT OUTER JOIN (LEFT JOIN) : 기준 테이블의 모든 레코드와 조합할 테이블 중 조건에 일치하는 레코드만 반환
+-- 만약에 조합할 테이블에 조건에 일치하는 레코드가 존재하지 않으면 null로 표현
+SELECT 
+E.employee_number '사번', E.name '사원이름', E.age '나이', E.department_code '부서코드', 
+D.name '부서명', D.tel_number '부서 전화번호'
+FROM employee E LEFT JOIN department D ON E.department_code = D.department_code;
 
+-- RIGHT OUTER JOIN (RIGHT JOIN) : 조합할 테이블의 모든 레코드와 기준 테이블 중 조건에 일치하는 레코드만 반환
+-- 만약 기준 테이블에 조건에 일치하는 레코드가 존재하지 않으면 null로 반환
+SELECT 
+E.employee_number '사번', E.name '사원이름', E.age '나이', 
+D.department_code '부서코드', D.name '부서명', D.tel_number '부서 전화번호'
+FROM employee E RIGHT JOIN department D ON E.department_code = D.department_code;
 
+-- FULL OUTER JOIN (FULL JOIN) : 기준 테이블의 모든 레코드와 조합할 테이블의 모든 레코드를 반환 (일치하는 레코드(중복 제거), 각 서로의 레코드)
+-- 만약 기준 테이블 혹은 조합할 테이블에 조건에 일치하는 레코드가 존재하지 않으면 null로 반환
+-- MySQL에서는 FULL OUTER JOIN을 문법상 제공하지 않음
+-- FULL JOIN = LEFT JOIN + RIGHT JOIN : UNION
+SELECT 
+E.employee_number '사번', E.name '사원이름', E.age '나이', E.department_code '부서코드', 
+D.name '부서명', D.tel_number '부서 전화번호'
+FROM employee E LEFT JOIN department D ON E.department_code = D.department_code
+UNION
+SELECT 
+E.employee_number '사번', E.name '사원이름', E.age '나이', 
+D.department_code '부서코드', D.name '부서명', D.tel_number '부서 전화번호'
+FROM employee E RIGHT JOIN department D ON E.department_code = D.department_code;
+
+-- CROSS JOIN : 기준 테이블의 각 레코드를 조합할 테이블의 모든 레코드에 조합하여 반환
+-- CROSS JOIN 결과 레코드 수 = 기준 테이블 레코드 수 * 조합할 테이블의 레코드 수
+SELECT * FROM employee E CROSS JOIN department D;
+-- MySQL에서 기본 조인이 CROSS JOIN 형태임
+SELECT * FROM employee E JOIN department D;
+SELECT * FROM employee E, department D;
+
+-- 부서코드가 A인 사원에 대해
+-- 사번, 이름, '부서명'을 조회하시오. (조회해서 반환할 컬럼의 레코드가 다른 테이블에 있기 때문에 JOIN)
+SELECT E.employee_number '사번', E.name '이름', D.name '부서명'
+FROM employee E INNER JOIN department D
+ON E.department_code = D.department_code
+WHERE E.department_code = 'A';
+
+-- 부서명이 '영업부'인 사원에 대해
+-- 사번, 이름, 나이를 조회하시오. 
+-- (여기선 기준 테이블에서만 컬럼의 레코드를 조회해오기 때문에 JOIN을 쓰지 않아도 된다. 속도가 느려지는 비효율)
+SELECT E.employee_number '사번', E.name '이름', E.age '나이'
+FROM employee E INNER JOIN department D
+ON E.department_code = D.department_code
+WHERE D.name = '영업부';
 
 
 
