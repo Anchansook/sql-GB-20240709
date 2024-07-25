@@ -28,7 +28,7 @@ SELECT date, IF (amount > 100000, '고액', '소액') '금액'
 FROM sale;
 
 -- IFNULL 함수 : 첫번째 매개변수의 값이 NULL인지에 따라 결과를 반환하는 함수
--- IFNULL (값, 값이 null일 때 반환할 결과)
+-- IFNULL (컬럼, 컬럼이 null일 때 반환할 결과)
 SELECT 사번, 사원이름, IFNULL(부서명, '없음') '부서명'
 FROM employee_view;
 
